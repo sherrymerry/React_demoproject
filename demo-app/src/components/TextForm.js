@@ -26,7 +26,6 @@ export default function Textform(props) {
       setTextColor(newTextColor); 
     };
 
-
     const handleSliceClick = () =>{
       let newText = text.slice(1);
       setText(newText);
@@ -55,7 +54,6 @@ export default function Textform(props) {
 
 // text="new text";
 // setText=("newText");
-
 
   return (
     <>
