@@ -6,29 +6,36 @@ export default function Textform(props) {
     const handleUpClick = ()=> {
         let newText=text.toUpperCase();
         setText(newText);
+        props.showAlert("Converted to Upper Case!" , "Success")
     }
 
     const handleLowClick = ()=>{
         let newText=text.toLowerCase();
         setText(newText);
+        props.showAlert("Converted to Lower Case!" , "Success")
     }
 
     const handleClearClick = ()=>{
         let newText=('');
         setText(newText);
+        props.showAlert("Text Cleared!" , "Success")
     }
 
     const [textColor, setTextColor] = useState('black');
 
-
     const handleColourClick = () => {
       const newTextColor = textColor === 'black' ? 'blue' : 'green';
       setTextColor(newTextColor); 
+      props.showAlert("Colour changed!" , "Success")
+
+      
     };
 
     const handleSliceClick = () =>{
       let newText = text.slice(1);
       setText(newText);
+      props.showAlert("Characters has been removed!" , "Success")
+      
     }
 
     const handleCopyClick = () =>{
@@ -36,12 +43,13 @@ export default function Textform(props) {
       text.select();
       text.setSelectionRange(0, 9999);
       navigator.clipboard.writeText(text.value);
-      
+      props.showAlert("Copied to Clipboard!" , "Success")
     }
 
     const handleSpaceClick = () =>{
       let newText=text.split(/[ ]+/);
       setText(newText.join(" "));
+      props.showAlert("Extra Space has been removed!" , "Success")
 
     }
     const handleOnChange = (event) =>{   
@@ -79,7 +87,8 @@ export default function Textform(props) {
     
     <div className="container my-3" style={{Color: props.mode === 'black'?'white':'#042743', }}>
       <h1>Your text summary</h1>
-      <p>{text.split(" ").length} words & {text.length} characters</p>
+      <p>{text.trim().split(/\s+/).filter(word => word !== "").length} words & {text.trim().replace(/\s+/g, '').length} characters</p>
+      {/* <p>{text.split(" ").length} words & {text.length} characters</p> */}
       <p>{0.008 * text.split(" ").length} Minutes read</p>
       <h2>Preview</h2>
       <p className="my-2" style={{ color: textColor }}>{text.length>0?text:"Enter soemthing in textbox above to preview here:"}</p>
