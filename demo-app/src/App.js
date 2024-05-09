@@ -4,12 +4,12 @@ import TextForm from './components/TextForm';
 import About from './components/About';
 import React, {useState} from 'react'
 import Alert from './components/Alert';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-}from "react-router-dom";
+// import {
+//   BrowserRouter as Router,
+//   Switch,
+//   Route,
+//   Link
+// }from "react-router-dom";
 
 function App() {
   const [mode, setMode] = useState('light');
@@ -27,14 +27,27 @@ const showAlert = (message, type) => {
     
   }
   
-const toggleMode = () =>{
+const removeBodyClasses = () =>{
+
+    
+    document.body.classList.remove('bg-primary')
+    document.body.classList.remove('bg-warning')
+    document.body.classList.remove('bg-danger')
+    document.body.classList.remove('bg-success')
+
+}
+
+const toggleMode = (cls) =>{
+  removeBodyClasses();
+  document.body.classList.add('bg-'+cls)
+
   if(mode === 'light'){
     setMode('dark');
     document.body.style.backgroundColor = 'grey';
     showAlert("Dark mode has been enabled", "success");
     document.title='Textutils - DarkMode';
 
-  }
+}
   
   else{
 
@@ -56,22 +69,19 @@ const toggleMode = () =>{
   }
   return (
 <>
-<Router>
+
 <Navbar title="Textutils" aboutText="About Textutils" homeText="Home Textutils" mode={mode} toggleMode={toggleMode}/>
+<div className="container my-3">
+
+<TextForm showAlert={showAlert} heading="TextUtils Word Counter | Character Counter | Remove extra spaces" mode={mode}/>
 
 <Alert alert={alert}/>
-    <div className="container my-3">
-      <Switch>
-        <Route exact path="/about">
-            <About />
-          </Route>
-          <Route exact path="/">
-          <TextForm showAlert={showAlert} heading="Enter the text to analyze below" 
-           mode={mode}/>
-        </Route>
-      </Switch>
+ 
+ 
+<About/>
+    
     </div>      
-</Router>
+
 
 </>
   );

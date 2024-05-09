@@ -2,26 +2,27 @@ import React, {useState} from 'react'
 
 
 export default function Textform(props) {
+  
 
-    const handleUpClick = ()=> {
+const handleUpClick = ()=> {
         let newText=text.toUpperCase();
         setText(newText);
         props.showAlert("Converted to Upper Case!" , "Success")
     }
 
-    const handleLowClick = ()=>{
+const handleLowClick = ()=>{
         let newText=text.toLowerCase();
         setText(newText);
         props.showAlert("Converted to Lower Case!" , "Success")
     }
 
-    const handleClearClick = ()=>{
+const handleClearClick = ()=>{
         let newText=('');
         setText(newText);
         props.showAlert("Text Cleared!" , "Success")
     }
 
-    const [textColor, setTextColor] = useState('black');
+const [textColor, setTextColor] = useState('black');
 
     const handleColourClick = () => {
       const newTextColor = textColor === 'black' ? 'blue' : 'green';
@@ -31,14 +32,14 @@ export default function Textform(props) {
       
     };
 
-    const handleSliceClick = () =>{
+const handleSliceClick = () =>{
       let newText = text.slice(1);
       setText(newText);
       props.showAlert("Characters has been removed!" , "Success")
       
     }
 
-    const handleCopyClick = () =>{
+const handleCopyClick = () =>{
       let text=document.getElementById('exampleFormControlTextarea1');
       text.select();
       text.setSelectionRange(0, 9999);
@@ -46,22 +47,18 @@ export default function Textform(props) {
       props.showAlert("Copied to Clipboard!" , "Success")
     }
 
-    const handleSpaceClick = () =>{
+const handleSpaceClick = () =>{
       let newText=text.split(/[ ]+/);
       setText(newText.join(" "));
       props.showAlert("Extra Space has been removed!" , "Success")
 
     }
-    const handleOnChange = (event) =>{   
+const handleOnChange = (event) =>{   
         setText(event.target.value)
     }
 
-
-
-  const [text, setText] = useState(''); 
-
-// text="new text";
-// setText=("newText");
+  
+const [text, setText] = useState(''); 
 
   return (
     <>
@@ -72,26 +69,26 @@ export default function Textform(props) {
 <div className="mb-3">
 
 
-  <textarea className="form-control" value={text} onChange={handleOnChange}  style={{backgroundColor: props.mode === 'light'?'grey':'white' ,
-  Color: props.mode === 'light'?'#042743':'white' , Color : textColor }} id="exampleFormControlTextarea1" rows="9"></textarea>
+<textarea className="form-control" value={text} onChange={handleOnChange}  style={{backgroundColor: props.mode === 'light'?'lightblue':'white' ,
+Color: props.mode === 'light'?'#042743':'white' , Color : textColor }} id="exampleFormControlTextarea1" rows="9"></textarea>
 
   </div>
-  <button className="btn btn-primary mx-3" onClick={handleUpClick}>Convert to Upper case</button>
-  <button className="btn btn-success mx-3" onClick={handleLowClick}>Convert to Lower case</button>
-  <button className="btn btn-info mx-3" onClick={handleClearClick}>Clear text</button>
-  <button className="btn btn-warning m-3 p-2" onClick={handleColourClick}>Change colour</button>
-  <button className="btn btn-dark m-3 p-2" onClick={handleSliceClick}>Remove Characters</button>
-  <button className="btn btn-danger m-3 p-2" onClick={handleCopyClick}>Copy Text</button>
-  <button className="btn btn-danger m-3 p-2" onClick={handleSpaceClick}>Remove Extra Spaces</button>
+  <button disabled={text.length===0} className="btn btn-primary mx-3 my-1" onClick={handleUpClick}>Convert to Upper case</button>
+  <button disabled={text.length===0} className="btn btn-success mx-3 my-1" onClick={handleLowClick}>Convert to Lower case</button>
+  <button disabled={text.length===0} className="btn btn-info mx-3 my-1" onClick={handleClearClick}>Clear text</button>
+  <button disabled={text.length===0} className="btn btn-warning m-3 my-1" onClick={handleColourClick}>Change colour</button>
+  <button disabled={text.length===0} className="btn btn-dark m-3 my-1" onClick={handleSliceClick}>Remove Characters</button>
+  <button disabled={text.length===0} className="btn btn-danger m-3 my-1" onClick={handleCopyClick}>Copy Text</button>
+  <button disabled={text.length===0} className="btn btn-danger m-3 my-1" onClick={handleSpaceClick}>Remove Extra Spaces</button>
     </div>
     
     <div className="container my-3" style={{Color: props.mode === 'black'?'white':'#042743', }}>
       <h1>Your text summary</h1>
       <p>{text.trim().split(/\s+/).filter(word => word !== "").length} words & {text.trim().replace(/\s+/g, '').length} characters</p>
       {/* <p>{text.split(" ").length} words & {text.length} characters</p> */}
-      <p>{0.008 * text.split(" ").length} Minutes read</p>
+      <p>{0.008 * text.split(/\s+/).filter(word => word !== "").length} Minutes read</p>
       <h2>Preview</h2>
-      <p className="my-2" style={{ color: textColor }}>{text.length>0?text:"Enter soemthing in textbox above to preview here:"}</p>
+      <p className="my-2" style={{ color: textColor }}>{text.length>0?text:"Nothing to preview:"}</p>
 
 
     </div>
