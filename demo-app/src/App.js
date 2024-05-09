@@ -4,6 +4,7 @@ import TextForm from './components/TextForm';
 import About from './components/About';
 import React, {useState} from 'react'
 import Alert from './components/Alert';
+
 // import {
 //   BrowserRouter as Router,
 //   Switch,
@@ -29,12 +30,11 @@ const showAlert = (message, type) => {
   
 const removeBodyClasses = () =>{
 
-    
     document.body.classList.remove('bg-primary')
     document.body.classList.remove('bg-warning')
     document.body.classList.remove('bg-danger')
     document.body.classList.remove('bg-success')
-
+    
 }
 
 const toggleMode = (cls) =>{

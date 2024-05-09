@@ -40,10 +40,7 @@ const handleSliceClick = () =>{
     }
 
 const handleCopyClick = () =>{
-      let text=document.getElementById('exampleFormControlTextarea1');
-      text.select();
-      text.setSelectionRange(0, 9999);
-      navigator.clipboard.writeText(text.value);
+      navigator.clipboard.writeText(text);
       props.showAlert("Copied to Clipboard!" , "Success")
     }
 
