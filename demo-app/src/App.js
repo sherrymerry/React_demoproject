@@ -33,8 +33,7 @@ const removeBodyClasses = () =>{
     document.body.classList.remove('bg-primary')
     document.body.classList.remove('bg-warning')
     document.body.classList.remove('bg-danger')
-    document.body.classList.remove('bg-success')
-    
+    document.body.classList.remove('bg-success')    
 }
 
 const toggleMode = (cls) =>{
